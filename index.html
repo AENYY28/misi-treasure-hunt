@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///C:/Users/hAa_YaNie/Downloads/misi_treasure_hunt%20(1).html -->
+<html lang="ms"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misi Treasure Hunt | Sains Tingkatan 2</title>
+<style>
+:root{
+  --bg:#030817; --panel:#07172c; --panel2:#0a2340; --blue:#16c9ff;
+  --blue2:#4a7dff; --white:#eef8ff; --muted:#a9c7e4; --pink:#ff69bd;
+  --gold:#ffd66b; --green:#61f0c0; --danger:#ff6480;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(27,117,255,.2),transparent 28%),
+    radial-gradient(circle at 85% 80%,rgba(0,211,255,.13),transparent 30%),
+    linear-gradient(145deg,#020611,#06152a 55%,#030817);
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;
+  background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#57cfff 1px,transparent 1px);
+  background-size:83px 83px,137px 137px;background-position:0 0,35px 45px;
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.app{position:relative;max-width:1180px;margin:auto;padding:20px}
+.topbar{
+ display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+ padding:18px 22px;border:1px solid #1b83c8;border-radius:20px;
+ background:linear-gradient(120deg,rgba(8,31,59,.96),rgba(4,12,29,.96));
+ box-shadow:0 0 28px #007dff25,inset 0 0 18px #007dff0b;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{font-size:42px;filter:drop-shadow(0 0 10px #16c9ff)}
+h1{font-size:clamp(1.35rem,3vw,2.25rem);margin:0;letter-spacing:1.5px}
+.subtitle{color:var(--muted);margin-top:5px;font-size:.95rem}
+.hud{display:flex;gap:10px;flex-wrap:wrap}
+.hudbox{min-width:105px;text-align:center;padding:10px 14px;border:1px solid #168cc8;border-radius:13px;background:#06152b}
+.hudbox small{display:block;color:var(--muted);font-weight:bold;letter-spacing:1px;font-size:.72rem}
+.hudbox strong{display:block;margin-top:5px;font-size:1.2rem;color:var(--blue)}
+main{margin-top:18px}
+.screen{display:none}
+.screen.active{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.hero{
+ border:1px solid #146da6;border-radius:24px;padding:clamp(24px,5vw,52px);
+ text-align:center;background:linear-gradient(145deg,#071a34eF,#061024f5);
+ box-shadow:0 0 36px #007dff16;overflow:hidden;position:relative;
+}
+.hero:after{content:"✦       ·        ✧        ·        ✦";display:block;color:#45cfff;letter-spacing:18px;margin-top:24px;opacity:.8}
+.hero .planet{font-size:clamp(3.5rem,9vw,6rem);margin:0 0 12px;filter:drop-shadow(0 0 18px #1abfff)}
+.hero h2{font-size:clamp(1.7rem,5vw,3.2rem);margin:0;color:#fff;text-shadow:0 0 18px #078dff}
+.hero p{max-width:650px;margin:14px auto 24px;line-height:1.65;color:var(--muted)}
+.btnrow{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{
+ border:1px solid #38cfff;border-radius:12px;padding:13px 20px;font-weight:bold;color:#fff;
+ background:linear-gradient(135deg,#087fd2,#1554c9);box-shadow:0 5px 0 #063b83,0 0 18px #009dff25;
+ transition:transform .15s,filter .15s;min-width:145px
+}
+.btn:hover{filter:brightness(1.18);transform:translateY(-2px)}
+.btn.secondary{background:#0a1c35;border-color:#245d8e;box-shadow:0 5px 0 #04101f}
+.btn.pink{background:linear-gradient(135deg,#a42f90,#ec4eaa);border-color:#ff91d6;box-shadow:0 5px 0 #661c66}
+.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr);gap:18px}
+.panel{border:1px solid #145d91;border-radius:20px;padding:20px;background:linear-gradient(150deg,#081a32f5,#040d20f5);box-shadow:0 0 24px #007dff0d}
+.panel h2,.panel h3{margin:0 0 12px}
+.panel h2{font-size:1.35rem}
+.muted{color:var(--muted);line-height:1.6}
+.map{
+ min-height:380px;position:relative;overflow:hidden;
+ background:radial-gradient(ellipse at 50% 50%,#0d3155 0,#06182f 52%,#030b19 100%);
+ border:1px solid #146da6;border-radius:17px;padding:20px;
+}
+.map:before{content:"";position:absolute;inset:0;opacity:.2;background:linear-gradient(35deg,transparent 48%,#13caff 49%,transparent 50%),linear-gradient(145deg,transparent 48%,#13caff 49%,transparent 50%);background-size:130px 130px}
+.map-label{position:relative;display:flex;justify-content:space-between;align-items:center;gap:10px;color:#a9dfff;font-size:.78rem;letter-spacing:1px;font-weight:bold}
+.route{position:relative;display:grid;grid-template-columns:repeat(5,minmax(40px,1fr));gap:28px 10px;align-items:center;margin:30px 0 24px}
+.checkpoint{
+ position:relative;z-index:1;justify-self:center;width:48px;height:48px;border-radius:50%;
+ display:grid;place-items:center;background:#081b35;border:2px solid #29cfff;color:white;
+ box-shadow:0 0 0 5px #12bfff1b,0 0 18px #00baff55;font-weight:bold;font-size:1.05rem;
+}
+.checkpoint.done{background:#0b9eac;border-color:#8affed;color:#fff}
+.checkpoint.current{background:#0d65c5;border-color:#fff;box-shadow:0 0 0 6px #2acbff35,0 0 28px #00bfff}
+.checkpoint.locked{opacity:.55}
+.route-line{position:absolute;z-index:0;left:7%;right:7%;top:50%;height:3px;background:repeating-linear-gradient(90deg,#22cfff 0 10px,transparent 10px 17px);filter:drop-shadow(0 0 4px #0bdcff)}
+.map-footer{position:relative;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.pill{border:1px solid #22638f;border-radius:999px;padding:8px 12px;background:#06172b;color:#c5e8ff;font-size:.85rem}
+.question{font-size:clamp(1.1rem,2.4vw,1.45rem);line-height:1.45;margin:10px 0 20px}
+.qmeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+.answers{display:grid;gap:10px}
+.answer{
+ width:100%;text-align:left;padding:14px 15px;border:1px solid #24517b;border-radius:12px;color:#eaf7ff;background:#081a31;
+ display:flex;gap:12px;align-items:center;line-height:1.4;transition:.15s
+}
+.answer:hover:not(:disabled){border-color:var(--blue);background:#0a2947}
+.answer .letter{flex:0 0 30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#0c3c67;color:#76e5ff;font-weight:bold}
+.answer.selected{border-color:#4ccfff;background:#0c3152}
+.answer.correct{border-color:var(--green);background:#07382f}
+.answer.wrong{border-color:var(--danger);background:#40182b}
+.feedback{min-height:26px;margin:13px 0;color:var(--gold);font-weight:bold}
+.game-actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:12px}
+.chicks{letter-spacing:3px;font-size:1.35rem}
+.big-result{font-size:4rem;margin:5px 0 15px}
+.list{padding-left:20px;line-height:1.8;color:var(--muted)}
+footer{text-align:center;padding:22px 10px;color:#7697b8;font-size:.8rem}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.map{min-height:300px}.route{gap:22px 5px}.checkpoint{width:40px;height:40px}.topbar{padding:15px}.hudbox{min-width:83px}.app{padding:12px}}
+@media(max-width:420px){.route{grid-template-columns:repeat(5,minmax(32px,1fr));gap:22px 3px}.checkpoint{width:34px;height:34px;font-size:.9rem}.panel{padding:15px}.hudbox{padding:8px}.logo{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">🚀</div>
+      <div>
+        <h1>MISI TREASURE HUNT</h1>
+        <div class="subtitle">SAINS TINGKATAN 2 · BAB 13: METEOROID, ASTEROID DAN KOMET</div>
+      </div>
+    </div>
+    <div class="hud" aria-label="Status permainan">
+      <div class="hudbox"><small>NYAWA</small><strong id="lifeHud">🐥 🐥 🐥 🐥</strong></div>
+      <div class="hudbox"><small>MARKAH</small><strong id="scoreHud">0/10</strong></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="homeScreen" class="screen active">
+      <div class="hero">
+        <div class="planet" aria-hidden="true">🪐</div>
+        <h2>JOM CARI HARTA ANGKASA!</h2>
+        <p>Terokai 10 checkpoint, jawab soalan Sains dan kumpulkan markah untuk sampai ke kapal angkasa penamat. Berhati-hati — jawapan yang salah akan mengurangkan nyawa!</p>
+        <div class="btnrow">
+          <button class="btn" id="startBtn">▶ MULA</button>
+          <button class="btn secondary" id="howBtn">☰ CARA BERMAIN</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="howScreen" class="screen">
+      <div class="panel">
+        <h2>🛰️ Cara Bermain</h2>
+        <ol class="list">
+          <li>Jawab 10 soalan tentang meteoroid, asteroid dan komet.</li>
+          <li>Pilih satu jawapan bagi setiap soalan, kemudian tekan <b>Hantar Jawapan</b>.</li>
+          <li>Jawapan betul menambah 1 markah dan membuka checkpoint seterusnya.</li>
+          <li>Jawapan salah mengurangkan 1 nyawa; anda boleh cuba soalan yang sama semula jika masih ada nyawa.</li>
+          <li>Anda bermula dengan 4 nyawa. Jika semua nyawa habis, permainan tamat.</li>
+          <li>Jawab semua 10 soalan dengan betul untuk menang!</li>
+        </ol>
+        <button class="btn" id="backHomeBtn">KEMBALI</button>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <div class="layout">
+        <div class="panel">
+          <div class="qmeta"><span id="checkpointLabel">CHECKPOINT 1/10</span><span>📡 MISI SAINS</span></div>
+          <h2 class="question" id="questionText">Soalan akan dipaparkan di sini.</h2>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+          <div class="game-actions">
+            <button class="btn secondary" id="quitBtn">MENU UTAMA</button>
+            <button class="btn" id="submitBtn" disabled="">HANTAR JAWAPAN</button>
+            <button class="btn" id="nextBtn" hidden="">SETERUSNYA →</button>
+          </div>
+        </div>
+        <aside class="panel">
+          <h2>🗺️ Peta Misi</h2>
+          <p class="muted">Ikuti laluan checkpoint dari stesen mula hingga ke kapal angkasa penamat.</p>
+          <div class="map">
+            <div class="map-label"><span>◉ MULA</span><span>ANGKASA LEPAS</span></div>
+            <div class="route" id="route">
+              <div class="route-line"></div>
+            </div>
+            <div class="map-footer">
+              <span class="pill">🚀 10 CHECKPOINT</span>
+              <span class="pill">🏁 PENAMAT</span>
+            </div>
+          </div>
+          <div style="margin-top:16px">
+            <div class="muted">Baki nyawa</div><div class="chicks" id="lifeDisplay">🐥 🐥 🐥 🐥</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen">
+      <div class="hero">
+        <div class="big-result" id="resultIcon">🏆</div>
+        <h2 id="resultTitle">Misi Selesai!</h2>
+        <p id="resultText"></p>
+        <div class="btnrow">
+          <button class="btn" id="replayBtn">↻ MAIN SEMULA</button>
+          <button class="btn secondary" id="resultHomeBtn">MENU UTAMA</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>PROJEK PERMAINAN PENDIDIKAN · HTML5 + CSS + JAVASCRIPT</footer>
+</div>
+
+<script>
+"use strict";
+
+const questions = [
+  {q:"Apakah yang dimaksudkan dengan meteoroid?",a:["Batuan atau serpihan kecil yang berada di angkasa","Bintang yang menghasilkan cahaya sendiri","Planet yang mengelilingi Matahari","Awan gas di atmosfera Bumi"],correct:0,why:"Meteoroid ialah serpihan batuan atau logam yang berada di angkasa."},
+  {q:"Apakah yang dimaksudkan dengan asteroid?",a:["Objek yang terdiri daripada ais dan gas sahaja","Batuan besar yang mengelilingi Matahari","Bintang yang semakin tua","Satelit buatan manusia"],correct:1,why:"Asteroid ialah jasad berbatu yang mengelilingi Matahari."},
+  {q:"Apakah bahan utama yang membentuk komet?",a:["Besi cair sahaja","Air laut dan pasir","Ais, debu dan gas beku","Awan wap air di Bumi"],correct:2,why:"Komet mengandungi ais, debu dan gas beku."},
+  {q:"Apakah yang mungkin berlaku apabila meteoroid memasuki atmosfera Bumi?",a:["Ia terus menjadi planet","Ia menghasilkan jalur cahaya dan dikenali sebagai meteor","Ia berubah menjadi komet","Ia menghentikan putaran Bumi"],correct:1,why:"Geseran dengan atmosfera menyebabkan meteor kelihatan sebagai jalur cahaya."},
+  {q:"Apakah nama objek yang sampai ke permukaan Bumi selepas melalui atmosfera?",a:["Asteroid","Komet","Meteor","Meteorit"],correct:3,why:"Meteorit ialah cebisan yang berjaya sampai ke permukaan Bumi."},
+  {q:"Di manakah kebanyakan asteroid dalam Sistem Suria berada?",a:["Di antara Marikh dengan Musytari","Di dalam lautan Bumi","Di antara Bumi dengan Bulan sahaja","Di dalam Matahari"],correct:0,why:"Kebanyakan asteroid berada di jalur asteroid antara Marikh dan Musytari."},
+  {q:"Mengapakah ekor komet biasanya kelihatan apabila komet menghampiri Matahari?",a:["Komet menyerap batu dari Bumi","Ais komet menjadi panas lalu membebaskan gas dan debu","Komet menghasilkan cahaya seperti bintang","Komet berhenti bergerak"],correct:1,why:"Haba Matahari menyebabkan ais komet menyublim dan membebaskan gas serta debu."},
+  {q:"Ke arah manakah ekor komet biasanya menghala?",a:["Sentiasa ke arah Matahari","Sentiasa ke arah Bumi","Menjauhi Matahari","Ke arah planet terbesar sahaja"],correct:2,why:"Angin suria dan tekanan cahaya menolak bahan ekor menjauhi Matahari."},
+  {q:"Apakah perbezaan yang betul antara asteroid dengan komet?",a:["Asteroid biasanya berbatu, manakala komet mengandungi banyak ais dan debu","Asteroid hanya berada di Bumi","Komet ialah bintang yang menyala","Kedua-duanya ialah satelit buatan"],correct:0,why:"Asteroid kebanyakannya berbatu; komet mengandungi ais, debu dan bahan beku."},
+  {q:"Antara berikut, yang manakah susunan istilah yang betul?",a:["Meteorit di angkasa, meteor di permukaan Bumi","Meteor di angkasa, meteoroid di permukaan Bumi","Meteoroid di angkasa, meteor ketika memasuki atmosfera, meteorit jika sampai ke permukaan","Asteroid, meteor dan komet semuanya benda yang sama"],correct:2,why:"Meteoroid berada di angkasa, meteor ialah jalur cahaya ketika memasuki atmosfera, dan meteorit ialah cebisan yang sampai ke permukaan."}
+];
+
+const state = {index:0, lives:4, score:0, selected:null, answered:false};
+const $ = id => document.getElementById(id);
+const screens = ["homeScreen","howScreen","gameScreen","resultScreen"];
+
+function showScreen(id){
+  screens.forEach(screenId => $(screenId).classList.toggle("active", screenId === id));
+}
+function updateHud(){
+  const icons = state.lives > 0 ? Array(state.lives).fill("🐥").join(" ") : "—";
+  $("lifeHud").textContent = icons;
+  $("lifeDisplay").textContent = icons;
+  $("scoreHud").textContent = `${state.score}/10`;
+}
+function drawRoute(){
+  const route = $("route");
+  route.innerHTML = '<div class="route-line"></div>';
+  for(let i=0;i<10;i++){
+    const node = document.createElement("div");
+    node.className = "checkpoint" + (i < state.index ? " done" : i === state.index ? " current" : " locked");
+    node.textContent = String(i+1);
+    node.setAttribute("aria-label", `Checkpoint ${i+1}`);
+    route.appendChild(node);
+  }
+}
+function renderQuestion(){
+  state.selected = null;
+  state.answered = false;
+  const item = questions[state.index];
+  $("checkpointLabel").textContent = `CHECKPOINT ${state.index+1}/10`;
+  $("questionText").textContent = item.q;
+  $("feedback").textContent = "";
+  $("submitBtn").hidden = false;
+  $("submitBtn").disabled = true;
+  $("nextBtn").hidden = true;
+  const container = $("answers");
+  container.innerHTML = "";
+  item.a.forEach((answer,index)=>{
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer";
+    button.innerHTML = `<span class="letter">${String.fromCharCode(65+index)}</span><span></span>`;
+    button.querySelector("span:last-child").textContent = answer;
+    button.addEventListener("click",()=>{
+      if(state.answered) return;
+      state.selected = index;
+      [...container.children].forEach(el=>el.classList.remove("selected"));
+      button.classList.add("selected");
+      $("submitBtn").disabled = false;
+    });
+    container.appendChild(button);
+  });
+  updateHud();
+  drawRoute();
+}
+function startGame(){
+  state.index = 0; state.lives = 4; state.score = 0; state.selected = null; state.answered = false;
+  showScreen("gameScreen");
+  renderQuestion();
+}
+function finishGame(won){
+  showScreen("resultScreen");
+  $("resultIcon").textContent = won ? "🏆" : "🛰️";
+  $("resultTitle").textContent = won ? "TAHNIAH, ANGKASAWAN!" : "MISI TAMAT";
+  $("resultText").textContent = won
+    ? `Anda berjaya melengkapkan semua 10 checkpoint dengan markah ${state.score}/10. Hebat!`
+    : `Nyawa anda telah habis. Markah akhir: ${state.score}/10. Cuba lagi untuk menguasai topik ini!`;
+}
+function submitAnswer(){
+  if(state.selected === null || state.answered) return;
+  state.answered = true;
+  const item = questions[state.index];
+  const buttons = [...$("answers").children];
+  buttons.forEach((button,i)=>{
+    button.disabled = true;
+    if(i === item.correct) button.classList.add("correct");
+    if(i === state.selected && i !== item.correct) button.classList.add("wrong");
+  });
+  $("submitBtn").hidden = true;
+  if(state.selected === item.correct){
+    state.score++;
+    $("feedback").textContent = `✓ Betul! ${item.why}`;
+    $("feedback").style.color = "var(--green)";
+    $("nextBtn").hidden = false;
+    $("nextBtn").textContent = state.index === questions.length-1 ? "TAMATKAN MISI →" : "CHECKPOINT SETERUSNYA →";
+  }else{
+    state.lives--;
+    $("feedback").textContent = `✕ Belum tepat. ${item.why}`;
+    $("feedback").style.color = "var(--danger)";
+    updateHud();
+    $("nextBtn").hidden = false;
+    $("nextBtn").textContent = state.lives <= 0 ? "LIHAT KEPUTUSAN" : "CUBA LAGI ↻";
+  }
+  updateHud();
+  drawRoute();
+}
+function nextStep(){
+  if(state.lives <= 0){finishGame(false);return;}
+  if(state.selected !== null && state.selected !== questions[state.index].correct){
+    renderQuestion();
+    return;
+  }
+  if(state.index >= questions.length-1){finishGame(true);return;}
+  state.index++;
+  renderQuestion();
+}
+
+$("startBtn").addEventListener("click",startGame);
+$("howBtn").addEventListener("click",()=>showScreen("howScreen"));
+$("backHomeBtn").addEventListener("click",()=>showScreen("homeScreen"));
+$("submitBtn").addEventListener("click",submitAnswer);
+$("nextBtn").addEventListener("click",nextStep);
+$("quitBtn").addEventListener("click",()=>showScreen("homeScreen"));
+$("replayBtn").addEventListener("click",startGame);
+$("resultHomeBtn").addEventListener("click",()=>showScreen("homeScreen"));
+
+updateHud();
+</script>
+
+
+</body></html>
